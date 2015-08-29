@@ -2622,3 +2622,10 @@ config HAS_MACH_MEMUTILS
 	help
 	Faster memcpy performance for Krait
 endif
+
+config MSM_SLEEPER
+	bool "Limit max frequency and shut off cores while screen is off"
+	default n
+	help
+	  Limit max frequency and shut off cores while screen is off
+
