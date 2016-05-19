@@ -757,10 +757,9 @@ static irqreturn_t mdm_pblrdy_change(int irq, void *dev_id)
 
 static int mdm_subsys_shutdown(const struct subsys_desc *crashed_subsys)
 {
-	atomic_inc(&ssr_in_progress);
-	struct mdm_device *mdev =
-	 container_of(crashed_subsys, struct mdm_device, mdm_subsys);
+	struct mdm_device *mdev = container_of(crashed_subsys, struct mdm_device, mdm_subsys);
 	struct mdm_modem_drv *mdm_drv = &mdev->mdm_data;
+	atomic_inc(&ssr_in_progress);
 
 	pr_debug("%s: ssr on modem id %d\n", __func__,
 			 mdev->mdm_data.device_id);
