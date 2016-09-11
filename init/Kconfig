@@ -941,7 +941,7 @@ endif
 
 choice
 	prompt "Optimization level"
-	default CC_OPTIMIZE_DEFAULT
+	default CC_OPTIMIZE_O3
 
 config CC_OPTIMIZE_FOR_SIZE
 	bool "Use -Os"
@@ -949,10 +949,10 @@ config CC_OPTIMIZE_FOR_SIZE
 config CC_OPTIMIZE_DEFAULT
 	bool "Use -O2"
 
-config CC_OPTIMIZE_MORE
+config CC_OPTIMIZE_O3
 	bool "Use -O3"
 
-config CC_OPTIMIZE_ALOT
+config CC_OPTIMIZE_FAST
 	bool "Use -Ofast"
 
 endchoice
