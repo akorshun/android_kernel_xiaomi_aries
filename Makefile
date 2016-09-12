@@ -332,7 +332,7 @@ include $(srctree)/scripts/Kbuild.include
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
 CC		= $(CCACHE) $(CROSS_COMPILE)gcc
-ifeq ($(strip $(CC_OPTIMIZE_MORE)),true)
+ifdef CONFIG_CC_OPTIMIZE_O3
 CC		+= -O3
 endif
 CPP		= $(CC) -E
@@ -352,7 +352,7 @@ CHECK		= sparse
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
 
-KERNELFLAGS	= -DNDEBUG -mcpu=cortex-a15 -mtune=cortex-a15 -marm -mfpu=neon-vfpv4 -munaligned-access -fgcse-lm -fgcse-sm -fforce-addr -ffast-math -fsched-spec-load -fsingle-precision-constant -fgcse-las -ftree-vectorize -mvectorize-with-neon-quad -fmodulo-sched -fmodulo-sched-allow-regmoves -fipa-pta -fgraphite -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block
+KERNELFLAGS	= -mcpu=cortex-a15 -mtune=cortex-a15 -marm -mfpu=neon-vfpv4 -munaligned-access -fgcse-lm -fgcse-sm -fforce-addr -ffast-math -fsched-spec-load -fsingle-precision-constant -fgcse-las -ftree-vectorize -mvectorize-with-neon-quad -fmodulo-sched -fmodulo-sched-allow-regmoves -fipa-pta -fgraphite -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block -DNDEBUG
 CFLAGS_MODULE   = -DMODULE $(KERNELFLAGS)
 AFLAGS_MODULE   = -DMODULE $(KERNELFLAGS)
 LDFLAGS_MODULE  =
@@ -571,10 +571,10 @@ endif
 ifdef CONFIG_CC_OPTIMIZE_DEFAULT
 KBUILD_CFLAGS	+= -O2
 endif
-ifdef CONFIG_CC_OPTIMIZE_MORE
+ifdef CONFIG_CC_OPTIMIZE_O3
 KBUILD_CFLAGS	+= -O3
 endif
-ifdef CONFIG_CC_OPTIMIZE_ALOT
+ifdef CONFIG_CC_OPTIMIZE_FAST
 KBUILD_CFLAGS	+= -Ofast
 endif
 
