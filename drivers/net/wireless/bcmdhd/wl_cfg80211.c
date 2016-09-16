@@ -5083,7 +5083,7 @@ wl_notify_connect_status(struct wl_priv *wl, struct net_device *ndev,
 			if (wl_get_drv_status(wl, CONNECTING, ndev))
 				wl_bss_connect_done(wl, ndev, e, data, false);
 		} else {
-			printk("%s nothing\n", __FUNCTION__);
+			WL_DBG(("%s nothing\n", __FUNCTION__));
 		}
 	}
 	return err;
